@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Idea;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -34,9 +35,15 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(Request $request)
     {
-        //
+        $idea_id = $request->query('idea_id');
+        $idea = Idea::findOrFail($idea_id);
+        $comments = $idea->comments;
+        return response()->json([
+            'idea_id' => $idea_id,
+            'comments' => $comments
+        ], 200);
     }
 
     /**
