@@ -16,7 +16,7 @@ php artisan key:generate
 4. run
 
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 5. run
