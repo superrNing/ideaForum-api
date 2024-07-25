@@ -38,7 +38,7 @@ class CommentController extends Controller
     public function show(Request $request)
     {
         $idea_id = $request->query('idea_id');
-        $idea = Idea::findOrFail($idea_id);
+        $idea = Idea::with(['comments.user'])->findOrFail($idea_id);
         $comments = $idea->comments;
         return response()->json([
             'idea_id' => $idea_id,

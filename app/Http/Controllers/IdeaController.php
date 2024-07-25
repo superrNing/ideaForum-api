@@ -52,7 +52,8 @@ class IdeaController extends Controller
     public function show(Request $request)
     {
         $idea_id = $request->query('idea_id');
-        $idea = Idea::find($idea_id);
+        $idea = Idea::with('user')->find($idea_id);
+
         return response()->json($idea, 200);
     }
 
