@@ -49,9 +49,10 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $idea = Idea::find($id);
+        $idea_id = $request->query('idea_id');
+        $idea = Idea::find($idea_id);
         return response()->json($idea, 200);
     }
 
