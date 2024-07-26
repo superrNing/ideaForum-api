@@ -14,7 +14,10 @@ Route::middleware(['auth:sanctum'])->apiResource('ideas', IdeaController::class)
 
 // delete
 Route::middleware(['auth:sanctum'])->delete('/ideas', [IdeaController::class, 'destroy'])->name('ideas.destroy');
+// detail
 Route::middleware(['auth:sanctum'])->get('/idea_detail', [IdeaController::class, 'show'])->name('ideas.show');
+// update
+Route::middleware(['auth:sanctum'])->put('/ideas', [IdeaController::class, 'update'])->name('ideas.update');
 
 
 

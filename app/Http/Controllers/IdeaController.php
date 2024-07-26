@@ -18,7 +18,7 @@ class IdeaController extends Controller
             $query->where('like_type', 'like');
         }, 'likes as dislike_count' => function ($query) {
             $query->where('like_type', 'dislike');
-        }, 'comments'])->get();
+        }, 'comments'])->orderBy('created_at', 'desc')->get();
         // $ideas = Idea::withCount(['likes', 'comments'])->get();
 
         // 返回 JSON 响应
@@ -36,12 +36,12 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
         $idea = new Idea();
-        $idea->title = $request->query('title');
-        $idea->description = $request->query('description');
-        $idea->user_id = $request->query('user_id');
+        $idea->title = request('title');
+        $idea->description = request('description');
+        $idea->user_id = request('user_id');
 
         // logger()->info("Received user_id: $userId, idea_id: $ideaId");
 
@@ -71,9 +71,15 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Idea $idea)
+    public function update()
     {
-        //
+        $idea_id = request('idea_id');
+        $idea = Idea::find($idea_id);
+        $idea->title = request('title');
+        $idea->description = request('description');
+        $idea->user_id = request('user_id');
+        $idea->save();
+        return response()->json($idea, 200);
     }
 
     /**
