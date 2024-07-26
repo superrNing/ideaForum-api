@@ -22,6 +22,12 @@ Route::middleware(['auth:sanctum'])->get('/idea_detail', [IdeaController::class,
 Route::middleware(['auth:sanctum'])->get('/likes', [LikeController::class, 'index'])->name('likes.index');
 // specific idea's likes
 Route::middleware(['auth:sanctum'])->get('/idea_likes', [LikeController::class, 'show'])->name('likes.show');
+// add like
+Route::middleware(['auth:sanctum'])->post('/likes', [LikeController::class, 'store'])->name('likes.store');
+// remove like
+Route::middleware(['auth:sanctum'])->delete('/likes', [LikeController::class, 'destroy'])->name('likes.destroy');
+
 
 // specific idea's comments
 Route::middleware(['auth:sanctum'])->get('/idea_comments', [CommentController::class, 'show'])->name('comments.show');
+Route::middleware(['auth:sanctum'])->post('/comments', [CommentController::class, 'store'])->name('comments.store');

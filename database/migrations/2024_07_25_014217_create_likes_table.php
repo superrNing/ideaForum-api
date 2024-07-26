@@ -18,6 +18,8 @@ return new class extends Migration
             $table->bigInteger('idea_id')->unsigned();
             // Unique constraint to ensure a user can only like once per idea
             $table->unique(['idea_id', 'user_id']);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idea_id')->references('id')->on('ideas')->onDelete('cascade');
             $table->timestamps();
         });
     }

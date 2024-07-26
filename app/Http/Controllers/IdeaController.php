@@ -42,6 +42,9 @@ class IdeaController extends Controller
         $idea->title = $request->query('title');
         $idea->description = $request->query('description');
         $idea->user_id = $request->query('user_id');
+
+        // logger()->info("Received user_id: $userId, idea_id: $ideaId");
+
         $idea->save();
         return response()->json($idea, 201);
     }
