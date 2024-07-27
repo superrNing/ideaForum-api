@@ -34,3 +34,5 @@ Route::middleware(['auth:sanctum'])->delete('/likes', [LikeController::class, 'd
 // specific idea's comments
 Route::middleware(['auth:sanctum'])->get('/idea_comments', [CommentController::class, 'show'])->name('comments.show');
 Route::middleware(['auth:sanctum'])->post('/comments', [CommentController::class, 'store'])->name('comments.store');
+// delete
+Route::middleware(['auth:sanctum'])->delete('/comments', [CommentController::class, 'destroy'])->name('comments.destroy');
