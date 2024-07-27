@@ -17,6 +17,8 @@ return new class extends Migration
             $table->bigInteger('idea_id')->unsigned();
             $table->text('comment_text');
             $table->timestamps();
+            // make sure when  delete idea, the releated comments will be delete at same time
+            $table->foreign('idea_id')->references('id')->on('ideas')->onDelete('cascade');
         });
     }
 
@@ -25,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign(['idea_id']);
+        });
+
         Schema::dropIfExists('comments');
     }
 };

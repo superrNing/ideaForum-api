@@ -14,7 +14,7 @@ class IdeaController extends Controller
     public function index(Request $request)
     {
         $searchKey = $request->query('search_key', '');
-        // 获取所有 ideas 记录 with like and dislike and comment count
+        // ideas with like and dislike and comment count
         $query = Idea::withCount(['likes as like_count' => function ($query) {
             $query->where('like_type', 'like');
         }, 'likes as dislike_count' => function ($query) {
@@ -30,8 +30,7 @@ class IdeaController extends Controller
             });
         }
         $ideas = $query->get();
-        // 返回 JSON 响应
-        return response()->json($ideas);
+        return response()->json($ideas, 200);
     }
 
     /**
